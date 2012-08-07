@@ -17,6 +17,12 @@ public class Test {
     this.password = password;
   }
 
+  public static void main(String[] args) {
+    Test test = new Test("login", "password");
+    GenerateReportResponse report = test.generateReport(new GenerateReportRequest().withReportName("report"));
+    System.out.println(report);
+  }
+
   public GenerateReportResponse generateReport(GenerateReportRequest request) {
     return getService().generateReport(request);
   }
