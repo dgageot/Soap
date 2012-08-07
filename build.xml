@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<project default="wsdl2java" basedir=".">
+	<taskdef name="wsimport" classname="com.sun.tools.ws.ant.WsImport">
+		<classpath>
+			<fileset dir="lib">
+			        <include name="**/*.jar"/>
+			 </fileset>
+		</classpath>
+	</taskdef>
+
+	<target name="wsdl2java">
+		<wsimport xadditionalHeaders="true" sourcedestdir="generated-sources/main/java" xnocompile="true"
+			wsdl="https://raw.github.com/simonbrandhof/fortify-cxf-client/master/src/main/resources/fws.wsdl">
+			<xjcarg value="-Xvalue-constructor"/>
+			<xjcarg value="-Xcommons-lang"/>
+			<xjcarg value="-camelcase-always"/>
+			<xjcarg value="-Xcollection-setter-injector"/>
+			<xjcarg value="-Xfluent-api"/>
+		</wsimport>
+	</target>
+</project>
