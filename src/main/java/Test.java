@@ -4,11 +4,7 @@ import com.fortify.schema.fws.Services;
 import com.fortify.schema.fws.ServicesService;
 
 import javax.xml.ws.BindingProvider;
-import javax.xml.ws.handler.MessageContext;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Test {
@@ -29,11 +25,14 @@ public class Test {
     if (null == service) {
       service = new ServicesService().getServicesSoap11();
 
-      Map<String, Object> req_ctx = ((BindingProvider) service).getRequestContext();
-      Map<String, List<String>> headers = new HashMap<String, List<String>>();
-      headers.put("Username", Arrays.asList(login));
-      headers.put("Password", Arrays.asList(password));
-      req_ctx.put(MessageContext.HTTP_REQUEST_HEADERS, headers);
+      Map<String, Object> context = ((BindingProvider) service).getRequestContext();
+      context.put(BindingProvider.USERNAME_PROPERTY, login);
+      context.put(BindingProvider.PASSWORD_PROPERTY, password);
+
+      // Map<String, List<String>> headers = new HashMap<String, List<String>>();
+      // headers.put("Username", Arrays.asList(login));
+      // headers.put("Password", Arrays.asList(password));
+      // req_ctx.put(MessageContext.HTTP_REQUEST_HEADERS, headers);
     }
     return service;
   }
