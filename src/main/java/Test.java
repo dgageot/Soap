@@ -6,21 +6,21 @@ import com.fortify.schema.fws.ServicesService;
 public class Test {
   private final String login;
   private final String password;
-  private Services trthApiService;
+  private Services service;
 
   public Test(String login, String password) {
     this.login = login;
     this.password = password;
   }
 
-  public GenerateReportResponse cancelRequest(GenerateReportRequest request) {
+  public GenerateReportResponse generateReport(GenerateReportRequest request) {
     return getService().generateReport(request);
   }
 
-  protected Services getService() {
-    if (null == trthApiService) {
-      trthApiService = new ServicesService().getServicesSoap11();
+  private Services getService() {
+    if (null == service) {
+      service = new ServicesService().getServicesSoap11();
     }
-    return trthApiService;
+    return service;
   }
 }
